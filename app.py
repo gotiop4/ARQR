@@ -1,7 +1,7 @@
 from flask import Flask, request, send_file
 import qrcode
 import io
-
+import os
 app = Flask(__name__)
 
 @app.route('/')
@@ -39,4 +39,9 @@ def generate_qr():
     return send_file(img_io, mimetype='image/png')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    
+    port = int(os.environ.get("PORT", 10000))  # Get port from Render
+    app.run(host="0.0.0.0", port=port, debug=True)
+
+
+
